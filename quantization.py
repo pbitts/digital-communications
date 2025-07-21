@@ -37,15 +37,9 @@ class Quantization:
         '''Mid Rise Quantization (no levels on zero)
         receives the bits resolution and returns the quantized values'''
 
-        print('Mid Rise Quantization')
         self.quantization_levels: int = 2**bits_resolution
-        print("=============================")
-        print('Levels:', self.quantization_levels)
         self.delta: float =  ( max(self.signal_y_values) - min(self.signal_y_values) ) / self.quantization_levels
-        print('Delta:', self.delta)
-        print("=============================")
-
-        indexes: list = np.zeros(len(self.samples))
+        self.indexes: list = np.zeros(len(self.samples))
         index: int = 0
         self.quantization_values: list = np.zeros(len(self.samples))
         
@@ -53,11 +47,12 @@ class Quantization:
             index =  round (   (self.samples[i] - min(self.samples)  ) / self.delta    )   
             if index == self.quantization_levels:
                 index = index -1
-                indexes[i] = index 
+                self.indexes[i] = index 
             else:
-                indexes[i] = index
+                self.indexes[i] = index
             self.quantization_values[i] = min(self.signal_y_values) + (self.delta/2 + self.delta*index)
-        return self.quantization_values
+               
+        return self.quantization_values, self.indexes
 
 
     def quantization_error(self) -> list:

@@ -46,6 +46,30 @@
   <h3>Quantization Levels: {{ levels }}</h3>
   <h3>Quantization Delta: {{ delta }}</h3>
 
+  <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 900px; margin: auto;">
+  <thead>
+    <tr style="background-color: #007acc; color: white;">
+      <th>Sample #</th>
+      <th>Sample Value (y)</th>
+      <th>Index</th>
+      <th>Quantization Value</th>
+      <th>Quantization Error</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in range(samples|length) %}
+    <tr>
+      <td>{{ i }}</td>
+      <td>{{ samples[i] }}</td>
+      <td>{{ indexes[i] }}</td>
+      <td>{{ values[i] }}</td>
+      <td>{{ errors[i] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
   {% if plot_filename %}
   <h3>Filename: {{ plot_filename }}</h3>
 
