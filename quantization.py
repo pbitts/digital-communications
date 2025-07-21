@@ -12,7 +12,8 @@ class Quantization:
         self.signal_y_values = signal_y_values
         self.sample_catcher_frequency = sample_catcher_frequency
 
-
+        self.quantization_levels = 0
+        self.delta = 0
 
     def sample_catcher(self) -> dict:
         '''Mapping a finite number of samples from the signal_y_values and their related
@@ -35,12 +36,13 @@ class Quantization:
     def mid_rise (self, bits_resolution: int) -> list:
         '''Mid Rise Quantization (no levels on zero)
         receives the bits resolution and returns the quantized values'''
+
         print('Mid Rise Quantization')
-        quantization_levels: int = 2**bits_resolution
+        self.quantization_levels: int = 2**bits_resolution
         print("=============================")
-        print('Levels:', quantization_levels)
-        delta: float =  ( max(self.signal_y_values) - min(self.signal_y_values) ) / quantization_levels
-        print('Delta:', delta)
+        print('Levels:', self.quantization_levels)
+        self.delta: float =  ( max(self.signal_y_values) - min(self.signal_y_values) ) / self.quantization_levels
+        print('Delta:', self.delta)
         print("=============================")
 
         indexes: list = np.zeros(len(self.samples))
@@ -48,13 +50,13 @@ class Quantization:
         self.quantization_values: list = np.zeros(len(self.samples))
         
         for i in range(len(self.samples)):
-            index =  round (   (self.samples[i] - min(self.samples)  ) / delta    )   
-            if index == quantization_levels:
+            index =  round (   (self.samples[i] - min(self.samples)  ) / self.delta    )   
+            if index == self.quantization_levels:
                 index = index -1
                 indexes[i] = index 
             else:
                 indexes[i] = index
-            self.quantization_values[i] = min(self.signal_y_values) + (delta/2 + delta*index)
+            self.quantization_values[i] = min(self.signal_y_values) + (self.delta/2 + self.delta*index)
         return self.quantization_values
 
 

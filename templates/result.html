@@ -1,0 +1,65 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mid Rise Signal Quantization Simulator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+    }
+    .circuit {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .circuit h3 {
+      margin-top: 0;
+      color: #007acc;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 0.9em;
+    }
+    .footer a {
+      color: #007acc;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Mid Rise Signal Quantization Simulation</h1>
+
+
+  <h3>Quantization Levels: {{ levels }}</h3>
+  <h3>Quantization Delta: {{ delta }}</h3>
+
+  {% if plot_filename %}
+  <h3>Filename: {{ plot_filename }}</h3>
+
+    <div class="plot-container">
+        <img src="{{ plot_filename }}" alt="Signal Plot">
+    </div>
+
+  {% else %}
+    <p>Failed to generate graphics.</p>
+  {% endif %}
+
+  <div class="footer">
+    Developed by <a href="https://pbitts.github.io/" target="_blank">pbitts</a>
+  </div>
+
+</body>
+</html>
