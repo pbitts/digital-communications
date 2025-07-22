@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8LNBD021Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-E8LNBD021Q');
+  </script>
+
+  <meta charset="UTF-8">
+  <title>Mid Rise Signal Quantization Simulator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      width: 100%;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9em;
+    }
+    .footer a {
+      color: #007acc;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Mid Rise Signal Quantization Simulator</h1>
+
+ <form action="/simulate" method="post">
+  <label>Sine Wave Resolution (bits):</label>
+  <input type="number" name="sinewave_resolution" min="1" value="1000" required>
+
+  <label>Sine Wave Frequency (Hz):</label>
+  <input type="number" step="any" name="sinewave_frequency" min="1" value="1" required>
+
+  <label>Sine Wave Amplitude (V):</label>
+  <input type="number" step="any" name="sinewave_amplitude" value="10" required>
+
+  <label>Sine Wave DC Offset (V):</label>
+  <input type="number" step="any" name="sinewave_dc_offset" value="0" required>
+
+  <label>Quantization Resolution (Bits):</label>
+  <input type="number" step="any" name="quant_resolution" value="4" required>
+
+   <label>Sampling Rate (Hz):</label>
+  <input type="number" step="any" name="sampling_rate" value="100" required>
+
+    <button type="submit">Simulate</button>
+  </form>
+
+  <div class="footer">
+    Developed by <a href="https://pbitts.github.io/" target="_blank">pbitts</a>
+  </div>
+
+</body>
+</html> 

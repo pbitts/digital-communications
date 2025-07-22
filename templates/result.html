@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mid Rise Signal Quantization Simulator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+    }
+    .circuit {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .circuit h3 {
+      margin-top: 0;
+      color: #007acc;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 0.9em;
+    }
+    .footer a {
+      color: #007acc;
+      text-decoration: none;
+    }
+    button {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background-color: #005f99;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 1000px;
+      margin: auto;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    th {
+      background-color: #007acc;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Mid Rise Signal Quantization Simulation</h1>
+
+  {% if plot_filename %}
+    <h3>Filename: {{ plot_filename }}</h3>
+    <div class="plot-container">
+        <img src="{{ plot_filename }}" alt="Signal Plot">
+    </div>
+  {% else %}
+    <p>Failed to generate graphics.</p>
+  {% endif %}
+
+  <h3>Quantization Levels: {{ levels }}</h3>
+  <h3>Quantization Delta: {{ delta }}</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Sample #</th>
+        <th>Sample Value (y)</th>
+        <th>Index</th>
+        <th>Quantization Value</th>
+        <th>Quantization Error</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in range(samples|length) %}
+        <tr class="{% if i >= 10 %}expandable{% endif %}" style="{% if i >= 10 %}display: none;{% endif %}">
+          <td>{{ i }}</td>
+          <td>{{ samples[i] }}</td>
+          <td>{{ indexes[i] }}</td>
+          <td>{{ values[i] }}</td>
+          <td>{{ errors[i] }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div style="text-align: center; margin-top: 1em;">
+    <button id="toggleButton" onclick="toggleRows()" data-expanded="false">Show More</button>
+  </div>
+
+  <div class="footer">
+    Developed by <a href="https://pbitts.github.io/" target="_blank">pbitts</a>
+  </div>
+
+  <script>
+    function toggleRows() {
+      const rows = document.querySelectorAll('.expandable');
+      const button = document.getElementById('toggleButton');
+      const expanded = button.getAttribute('data-expanded') === 'true';
+
+      rows.forEach(row => {
+        row.style.display = expanded ? 'none' : '';
+      });
+
+      button.textContent = expanded ? 'Show More' : 'Show Less';
+      button.setAttribute('data-expanded', !expanded);
+    }
+  </script>
+
+</body>
+</html>
