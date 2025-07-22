@@ -11,6 +11,7 @@ def process(sinewave_resolution: int = 1000,
                     sinewave_dc_offset: float = 0, 
                     quant_resolution: int = 4,
                     sample_catcher_frequency: int = 100):
+    
     #Initiate class instance and produce a sine wave 
     #1000 bits, 1Hz frequency, 10 Volts amplitude and 0 Volts DC
     wave = Wave()
@@ -47,7 +48,6 @@ def process(sinewave_resolution: int = 1000,
     y_min, y_max = np.min(quantization_values), np.max(quantization_values)
     y_range = y_max - y_min
     ax2.set_ylim(y_min - 0.1*y_range, y_max + 0.1*y_range)
-
 
     ax3 = fig.add_subplot(313)
     ax3.plot(quantization_error)
