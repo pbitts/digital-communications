@@ -1,3 +1,4 @@
+from datetime import datetime
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -59,7 +60,7 @@ def process(sinewave_resolution: int = 1000,
 
     fig.tight_layout()
 
-    filename = f'static/plots/quantization_result.png'
+    filename = f'static/plots/quantization_result-{datetime.now()}.png'
     plt.savefig(filename)
 
     return filename, \
